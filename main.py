@@ -207,7 +207,7 @@ while True:
                                  usernames.write('%s\n' % (username))
                                  usernames
                              
-                            if len(tiktok.webhook_url).startswith('https://'):
+                            if tiktok.webhook_url.startswith('https://'):
                                pass
                             else:
                                tiktok.webhook_url = "https://nerd.com"
