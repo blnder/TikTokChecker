@@ -1,2 +1,16 @@
-# TikTokChecker
-Coolest open-source tiktok username checker, which is easy to use
+# TikTok Checker
+- Optimizanle Username Checker
+
+# Usage
+```
+Options:
+1. Dump already gathered username list
+2. Create randomized strings and dump into file (tiktok/data/usernames)
+```
+
+# Credits
+@vesperlol - Idea Maker
+@blnder    - I make vesper's projects better
+
+# Upcoming
+Making it faster, possibly using asyncio, or multithreading. Who knows 🤷
