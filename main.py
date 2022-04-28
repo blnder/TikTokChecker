@@ -5,7 +5,7 @@ import os
 Upcoming
 - Faster Processing
 - Faster Dumping
-
+o
 Fixing
 - Not adding COMPLETE list of unadded randomized strings
 
@@ -116,7 +116,7 @@ tiktok     = TikTok()
 configure  = TikTok().Configure(tiktok)
 
 if True:
-   webhook = configure.change_webhook(webhook_url = os.environ['WEBHOOK'])
+   webhook = configure.change_webhook(webhook_url = "")
    webhook
 
 while True:
@@ -203,6 +203,16 @@ while True:
                         )
                       else:
                          if __name__ == "__main__":
+                            with open("tiktok/data/valid", "a+") as usernames:
+                                 usernames.write('%s\n' % (username))
+                                 usernames
+                             
+                            if len(tiktok.webhook_url).startswith('https://'):
+                               pass
+                            else:
+                               tiktok.webhook_url = "https://nerd.com"
+                               tiktok
+
                             if requests.get(tiktok.webhook_url).status_code in [
                                                    200, 
                                                    201, 
