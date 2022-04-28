@@ -12,5 +12,3 @@ Options:
 @vesperlol - Idea Maker
 @blnder    - I make vesper's projects better
 
-# Upcoming
-Making it faster, possibly using asyncio, or multithreading. Who knows 🤷
