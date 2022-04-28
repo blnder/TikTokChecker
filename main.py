@@ -1,14 +1,9 @@
-import colorama, requests, random, string, time, pystyle
+import colorama, requests, random, string, time, pystyle, threading
 import os
 
 """
-Upcoming
-- Faster Processing
-- Faster Dumping
-o
 Fixing
 - Not adding COMPLETE list of unadded randomized strings
-
 """
 
 headers = {
@@ -78,6 +73,72 @@ class TikTok:
              self.pathToLogos = "tiktok/logo"
              self.pathToNames = "tiktok/data/usernames"
              self.pathToError = "tiktok/data/warnings"
+
+      def check(self, username = ""):
+                global headers
+        
+                if True:
+                      r = requests.get(
+                                   '%s/@%s' % (
+                                            TikTok.URI.tiktok, username
+                                   ), headers = headers
+                      )
+
+                      if r.status_code in [
+                           200, 
+                           201, 
+                           203, 
+                           204
+                      ]:
+                         print('[%s!%s] %sINVALID%s | [%s] [%s]' % (
+                                 colorama.Fore.RED, 
+                                 colorama.Fore.RESET,
+
+                                 colorama.Fore.WHITE,
+                                 colorama.Fore.RESET, username, r.status_code
+                              )
+                        )
+                      else:
+                         if __name__ == "__main__":
+                            with open("tiktok/data/valid", "a+") as usernames:
+                                 usernames.write('%s\n' % (username))
+                                 usernames
+                             
+                            if tiktok.webhook_url.startswith('https://'):
+                               pass
+                            else:
+                               tiktok.webhook_url = "https://nerd.com"
+                               tiktok
+
+                            if requests.get(tiktok.webhook_url).status_code in [
+                                                   200, 
+                                                   201, 
+                                                   203,
+                                                   204,
+                            ]:
+                               if int(len(username.strip())) < 4:
+                                  requests.post(
+                                           tiktok.webhook_url,
+                                           json   = {
+                                                  'embeds': [
+                                                          {
+                                                             'title'       : 'Rare Username Found',
+                                                             'description' : '`%s`' % (
+                                                                                   username
+                                                             )
+                                                          }
+                                                  ]
+                                           }
+                                  )
+
+                               print('[%s!%s] %sVALID%s | (%s)' % (
+                                       colorama.Fore.GREEN,
+                                       colorama.Fore.RESET,
+
+                                       colorama.Fore.WHITE,
+                                       colorama.Fore.RESET, username
+                               ))  
+        
 
       class Configure():
             def __init__(self, tiktok):
@@ -180,67 +241,8 @@ while True:
                for username in open(username_path, 'r').readlines():
                    username
 
-                   if True:
-                      r = requests.get(
-                                   '%s/@%s' % (
-                                            TikTok.URI.tiktok, username.strip()
-                                   ), headers = headers
-                      )
-
-                      if r.status_code in [
-                           200, 
-                           201, 
-                           203, 
-                           204
-                      ]:
-                         print('[%s!%s] %sINVALID%s | [%s] [%s]' % (
-                                 colorama.Fore.RED, 
-                                 colorama.Fore.RESET,
-
-                                 colorama.Fore.WHITE,
-                                 colorama.Fore.RESET, username.strip(), r.status_code
-                              )
-                        )
-                      else:
-                         if __name__ == "__main__":
-                            with open("tiktok/data/valid", "a+") as usernames:
-                                 usernames.write('%s\n' % (username))
-                                 usernames
-                             
-                            if tiktok.webhook_url.startswith('https://'):
-                               pass
-                            else:
-                               tiktok.webhook_url = "https://nerd.com"
-                               tiktok
-
-                            if requests.get(tiktok.webhook_url).status_code in [
-                                                   200, 
-                                                   201, 
-                                                   203,
-                                                   204,
-                            ]:
-                               if int(len(username.strip())) < 4:
-                                  requests.post(
-                                           tiktok.webhook_url,
-                                           json   = {
-                                                  'embeds': [
-                                                          {
-                                                             'title'       : 'Rare Username Found',
-                                                             'description' : '`%s`' % (
-                                                                                   username.strip()
-                                                             )
-                                                          }
-                                                  ]
-                                           }
-                                  )
-
-                               print('[%s!%s] %sVALID%s | (%s)' % (
-                                       colorama.Fore.GREEN,
-                                       colorama.Fore.RESET,
-
-                                       colorama.Fore.WHITE,
-                                       colorama.Fore.RESET, username.strip()
-                               ))       
+                   threading.Thread(target = tiktok.check, args = (username.strip(), )).start()
+                   threading
                               
             print('[!] Done'), input('')
             print
