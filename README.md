@@ -9,6 +9,6 @@ Options:
 ```
 
 # Credits
-@vesperlol - Idea Maker
-@blnder    - I make vesper's projects better
+- @vesperlol - Idea Maker
+- @blnder    - I make vesper's projects better
 
